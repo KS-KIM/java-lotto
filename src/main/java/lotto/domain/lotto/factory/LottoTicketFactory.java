@@ -19,6 +19,7 @@ import lotto.domain.lotto.LottoTicket;
  */
 public class LottoTicketFactory implements LottoGenerative {
 	private static final String LOTTO_FACTORY_NOT_FOUND_MESSAGE = "로또 생성기가 존재하지 않습니다.";
+
 	private List<LottoGenerative> lottoFactories;
 
 	public LottoTicketFactory(List<LottoGenerative> lottoFactories) {
