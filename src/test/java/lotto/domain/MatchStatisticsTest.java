@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class MatchResultTest {
-	private MatchResult matchResult;
+public class MatchStatisticsTest {
+	private MatchStatistics matchStatistics;
 
 	@BeforeEach
 	void setup() {
@@ -27,7 +27,7 @@ public class MatchResultTest {
 		statistics.put(LottoRank.THIRD, 3L);
 		statistics.put(LottoRank.FIFTH, 2L);
 		statistics.put(LottoRank.MISS, 4L);
-		matchResult = new MatchResult(statistics);
+		matchStatistics = new MatchStatistics(statistics);
 	}
 
 	@Test
@@ -38,37 +38,37 @@ public class MatchResultTest {
 		statistics.put(LottoRank.THIRD, 3L);
 		statistics.put(LottoRank.FIFTH, 2L);
 		statistics.put(LottoRank.MISS, 5L);
-		assertThat(new MatchResult(statistics)).isInstanceOf(MatchResult.class);
+		assertThat(new MatchStatistics(statistics)).isInstanceOf(MatchStatistics.class);
 	}
 
 	@Test
 	@DisplayName("생성자에 null 값을 입력한 경우 예외가 발생한다.")
 	void constructor_isNull() {
-		assertThatThrownBy(() -> new MatchResult(null)).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new MatchStatistics(null)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("생성자에 빈 map을 입력한 경우 예외가 발생한다.")
 	void constructor_isEmpty() {
 		Map<LottoRank, Long> statistics = new HashMap<>();
-		assertThatThrownBy(() -> new MatchResult(statistics)).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new MatchStatistics(statistics)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("총 수익률 연산 테스트")
 	void calculateTotalProfits() {
-		assertThat(matchResult.calculateTotalProfits()).isEqualTo(20045100L);
+		assertThat(matchStatistics.calculateTotalProfits()).isEqualTo(20045100L);
 	}
 
 	@Test
 	@DisplayName("당첨자가 있을 때 몇명인지 가져오는 테스트")
 	void findMatchCountByLottoRank() {
-		assertThat(matchResult.findMatchCountByLottoRank(LottoRank.FIFTH)).isEqualTo(2L);
+		assertThat(matchStatistics.findMatchCountByLottoRank(LottoRank.FIFTH)).isEqualTo(2L);
 	}
 
 	@Test
 	@DisplayName("당첨자가 없을 때 기본 값을 반환하는지 테스트")
 	void findMatchCountByLottoRank_DefaultRank() {
-		assertThat(matchResult.findMatchCountByLottoRank(LottoRank.SECOND)).isEqualTo(0L);
+		assertThat(matchStatistics.findMatchCountByLottoRank(LottoRank.SECOND)).isEqualTo(0L);
 	}
 }

@@ -3,10 +3,10 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,10 +34,10 @@ public class LottoTicketTest {
 				Lotto.of(1, 2, 3, 43, 44, 45)));
 		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.of(7));
 
-		Map<LottoRank, Long> matchResult = new HashMap<>();
-		matchResult.put(LottoRank.FIRST, 2L);
-		matchResult.put(LottoRank.THIRD, 1L);
-		MatchResult expected = new MatchResult(matchResult);
+		List<MatchResult> expected = new ArrayList<>();
+		expected.add(new MatchResult(MatchCount.of(6), false));
+		expected.add(new MatchResult(MatchCount.of(6), false));
+		expected.add(new MatchResult(MatchCount.of(5), false));
 
 		assertThat(lottoTicket.matchAll(winningLotto)).isEqualTo(expected);
 	}
@@ -47,7 +47,7 @@ public class LottoTicketTest {
 	void concat() {
 		LottoTicket lottoTicket1 = new LottoTicket(Collections.singletonList(Lotto.of(1, 2, 5, 43, 44, 45)));
 		LottoTicket lottoTicket2 = new LottoTicket(Collections.singletonList(Lotto.of(1, 2, 3, 4, 5, 6)));
-		assertThat(lottoTicket1.concat(lottoTicket2)).isInstanceOf(LottoTicket.class);
+		assertThat(LottoTicket.of(Arrays.asList(lottoTicket1, lottoTicket2))).isInstanceOf(LottoTicket.class);
 	}
 
 	@Test

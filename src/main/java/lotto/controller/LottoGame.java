@@ -11,12 +11,16 @@ import static lotto.view.OutputView.printTotalProfits;
 
 import java.util.List;
 
+import lotto.domain.AutoLottoTicketFactory;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerative;
-import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketFactory;
+import lotto.domain.ManualLottoTicketFactory;
 import lotto.domain.MatchResult;
+import lotto.domain.MatchStatistics;
 import lotto.domain.PurchaseCount;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
@@ -45,7 +49,9 @@ public class LottoGame {
 
 	private LottoTicket purchaseLottoTicket(PurchaseMoney purchaseMoney, PurchaseCount manualCount) {
 		List<String> lottoTicketNumbers = inputManualLottoTicketNumbers(manualCount);
-		LottoGenerative lottoMachine = new LottoMachine(lottoTicketNumbers);
+		LottoGenerative manualLottoTicketFactory = new ManualLottoTicketFactory(lottoTicketNumbers);
+		LottoGenerative autoLottoTicketFactory = new AutoLottoTicketFactory();
+		LottoGenerative lottoMachine = LottoTicketFactory.of(manualLottoTicketFactory, autoLottoTicketFactory);
 		return lottoMachine.generate(purchaseMoney);
 	}
 
@@ -56,8 +62,10 @@ public class LottoGame {
 	}
 
 	private void printMatchResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
-		MatchResult matchResult = lottoTicket.matchAll(winningLotto);
-		printStatistics(matchResult);
-		printTotalProfits(matchResult.calculateTotalProfits());
+		List<MatchResult> matchResults = lottoTicket.matchAll(winningLotto);
+		List<LottoRank> matchRanks = LottoRank.of(matchResults);
+		MatchStatistics matchStatistics = MatchStatistics.ofMatchRanks(matchRanks);
+		printStatistics(matchStatistics);
+		printTotalProfits(matchStatistics.calculateTotalProfits());
 	}
 }

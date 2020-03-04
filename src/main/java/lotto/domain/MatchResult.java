@@ -1,58 +1,58 @@
 package lotto.domain;
 
-import static lotto.domain.LottoGenerative.LOTTO_PRICE;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * 로또 통계 클래스
+ * MatchResult class
  *
  * @version 1.0.0
  * @author K.S.KIM
- * @since 2020/02/19
+ * @since 2020/03/04
  */
 public class MatchResult {
-	private static final String LOTTO_RESULT_NOT_FOUND_EXCEPTION = "통계를 수행할 로또 결과가 없습니다.";
-	private static final long DEFAULT_VALUE = 0L;
-	private static final int MULTIPLY_PERCENTAGE = 100;
+	private static final String MATCH_COUNT_IS_NULL_MESSAGE = "일치한 개수를 가지고 있지 않습니다.";
+	private static final String INVALID_MATCH_RESULT_MESSAGE = "존재할 수 없는 결과입니다.";
 
-	private final Map<LottoRank, Long> matchResult;
+	private final MatchCount matchCount;
+	private final boolean isBonus;
 
-	public MatchResult(Map<LottoRank, Long> matchResult) {
-		validate(matchResult);
-		this.matchResult = new HashMap<>(matchResult);
+	public MatchResult(MatchCount matchCount, boolean isBonus) {
+		validate(matchCount, isBonus);
+		this.matchCount = matchCount;
+		this.isBonus = isBonus;
 	}
 
-	private void validate(Map<LottoRank, Long> statistics) {
-		if (Objects.isNull(statistics) || statistics.isEmpty()) {
-			throw new IllegalArgumentException(LOTTO_RESULT_NOT_FOUND_EXCEPTION);
+	private void validate(MatchCount matchCount, boolean isBonus) {
+		validateNull(matchCount);
+		validateResult(matchCount, isBonus);
+	}
+
+	private void validateResult(MatchCount matchCount, boolean isBonus) {
+		if (matchCount.equals(MatchCount.of(MatchCount.MAX_MATCH)) && isBonus) {
+			throw new IllegalArgumentException(INVALID_MATCH_RESULT_MESSAGE);
 		}
 	}
 
-	public long calculateTotalProfits() {
-		long totalWinning = calculateTotalWinnings();
-		long totalPurchaseMoney = calculateTotalPurchaseMoney();
-		return totalWinning * MULTIPLY_PERCENTAGE / totalPurchaseMoney;
+	private void validateNull(MatchCount matchCount) {
+		if (Objects.isNull(matchCount)) {
+			throw new IllegalArgumentException(MATCH_COUNT_IS_NULL_MESSAGE);
+		}
 	}
 
-	private long calculateTotalWinnings() {
-		return matchResult.entrySet()
-				.stream()
-				.mapToLong(result -> result.getKey().calculateTotalWinnings(result.getValue()))
-				.sum();
+	public boolean isSameMatchCount(MatchCount matchCount) {
+		return this.matchCount.equals(matchCount);
 	}
 
-	private long calculateTotalPurchaseMoney() {
-		return matchResult.values()
-				.stream()
-				.mapToLong(LOTTO_PRICE::multiply)
-				.sum();
+	public boolean isMatchCountRangeClosedOf(int startInclusive, int endInclusive) {
+		return matchCount.isRangeClosedOf(startInclusive, endInclusive);
 	}
 
-	public Long findMatchCountByLottoRank(LottoRank rank) {
-		return matchResult.getOrDefault(rank, DEFAULT_VALUE);
+	public boolean isNotBonus() {
+		return !isBonus;
+	}
+
+	public boolean isBonus() {
+		return isBonus;
 	}
 
 	@Override
@@ -64,11 +64,11 @@ public class MatchResult {
 			return false;
 		}
 		MatchResult that = (MatchResult)object;
-		return Objects.equals(matchResult, that.matchResult);
+		return isBonus == that.isBonus && Objects.equals(matchCount, that.matchCount);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(matchResult);
+		return Objects.hash(matchCount, isBonus);
 	}
 }

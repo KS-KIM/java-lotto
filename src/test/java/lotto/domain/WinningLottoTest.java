@@ -39,6 +39,7 @@ public class WinningLottoTest {
 	@DisplayName("로또를 한 장 받아 반환한 당첨 순위를 반환한다")
 	void match() {
 		WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(9));
-		assertThat(winningLotto.match(Lotto.of(1, 2, 5, 43, 44, 45))).isEqualTo(LottoRank.FIRST);
+		MatchResult expect = new MatchResult(MatchCount.of(6), false);
+		assertThat(winningLotto.match(Lotto.of(1, 2, 5, 43, 44, 45))).isEqualTo(expect);
 	}
 }

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.MatchResult;
+import lotto.domain.MatchStatistics;
 import lotto.domain.PurchaseCount;
 import lotto.util.TextUtil;
 
@@ -28,9 +28,9 @@ public class OutputView {
 		System.out.println(TextUtil.generateLottoTicketText(lottoTicket));
 	}
 
-	public static void printStatistics(MatchResult matchResult) {
+	public static void printStatistics(MatchStatistics matchStatistics) {
 		System.out.println(STATISTICS_TITLE_MESSAGE);
-		System.out.print(TextUtil.generateMatchResultText(matchResult));
+		System.out.print(TextUtil.generateMatchResultText(matchStatistics));
 	}
 
 	public static void printTotalProfits(long totalProfits) {

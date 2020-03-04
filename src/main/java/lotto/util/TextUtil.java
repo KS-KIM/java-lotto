@@ -6,7 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
-import lotto.domain.MatchResult;
+import lotto.domain.MatchStatistics;
 
 /**
  * 출력 문자열을 생성해주는 유틸리티 클래스
@@ -41,10 +41,10 @@ public class TextUtil {
 				.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, START_BRACKET, END_BRACKET));
 	}
 
-	public static String generateMatchResultText(MatchResult matchResult) {
+	public static String generateMatchResultText(MatchStatistics matchStatistics) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (LottoRank rank : LottoRank.valuesAsReverse()) {
-			long matchCount = matchResult.findMatchCountByLottoRank(rank);
+			long matchCount = matchStatistics.findMatchCountByLottoRank(rank);
 			String matchText = generateMatchResultTextByMatchCount(rank, matchCount);
 			stringBuilder.append(matchText);
 		}

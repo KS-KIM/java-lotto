@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * 여러 개의 로또를 가지는 클래스
@@ -24,23 +24,22 @@ public class LottoTicket {
 		this.lottoTicket = Collections.unmodifiableList(lottoTicket);
 	}
 
-	public LottoTicket concat(LottoTicket concatTargetTicket) {
-		List<Lotto> concatenatedLottoTicket = new ArrayList<>(this.lottoTicket);
-		concatenatedLottoTicket.addAll(concatTargetTicket.lottoTicket);
-		return new LottoTicket(concatenatedLottoTicket);
+	public static LottoTicket of(List<LottoTicket> tickets) {
+		return tickets.stream()
+				.flatMap(ticket -> ticket.lottoTicket.stream())
+				.collect(collectingAndThen(toList(), LottoTicket::new));
+	}
+
+	public List<MatchResult> matchAll(WinningLotto winningLotto) {
+		return lottoTicket.stream()
+				.map(winningLotto::match)
+				.collect(toList());
 	}
 
 	private void validate(List<Lotto> lottoTicket) {
 		if (Objects.isNull(lottoTicket)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_MESSAGE);
 		}
-	}
-
-	public MatchResult matchAll(WinningLotto winningLotto) {
-		return lottoTicket.stream()
-				.map(winningLotto::match)
-				.collect(Collectors.collectingAndThen(Collectors.groupingBy(Function.identity(), Collectors.counting()),
-						MatchResult::new));
 	}
 
 	public int size() {

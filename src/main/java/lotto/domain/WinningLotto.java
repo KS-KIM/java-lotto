@@ -25,9 +25,9 @@ public class WinningLotto {
 		}
 	}
 
-	public LottoRank match(Lotto target) {
+	public MatchResult match(Lotto target) {
 		MatchCount matchCount = lotto.calculateMatchCount(target);
 		boolean isBonus = target.contains(bonus);
-		return LottoRank.of(matchCount, isBonus);
+		return new MatchResult(matchCount, isBonus);
 	}
 }

@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class MatchCount {
 	public static final String MATCH_COUNT_OUT_OF_RANGE_MESSAGE = "일치하는 로또 수가 범위를 벗어났습니다";
-	private static final int MIN_MATCH = 0;
-	private static final int MAX_MATCH = 6;
+	public static final int MIN_MATCH = 0;
+	public static final int MAX_MATCH = 6;
 	private static final Map<Integer, MatchCount> MATCH_COUNT_CACHE = new HashMap<>();
 
 	static {
@@ -39,6 +39,10 @@ public class MatchCount {
 		if (count < MIN_MATCH || count > MAX_MATCH) {
 			throw new IllegalArgumentException(MATCH_COUNT_OUT_OF_RANGE_MESSAGE);
 		}
+	}
+
+	public boolean isRangeClosedOf(int startInclusive, int endInclusive) {
+		return count >= startInclusive && count <= endInclusive;
 	}
 
 	@Override
