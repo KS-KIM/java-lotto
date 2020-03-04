@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
+import lotto.domain.PurchaseMoney;
 
 /**
  * 로또 순위 클래스

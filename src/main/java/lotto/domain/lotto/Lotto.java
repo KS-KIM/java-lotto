@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import lotto.domain.statistics.MatchCount;
 
 /**
  * 선택한 로또 하나를 나타내는 클래스

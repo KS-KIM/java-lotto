@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto.factory;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
@@ -6,6 +6,9 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+
+import lotto.domain.PurchaseMoney;
+import lotto.domain.lotto.LottoTicket;
 
 /**
  * 수동과 자동 로또를 생성하는 클래스

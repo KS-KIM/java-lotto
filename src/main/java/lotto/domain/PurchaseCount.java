@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lotto.factory.LottoGenerative;
+
 /**
  * 구매한 로또의 수를 저장하는 클래스
  *

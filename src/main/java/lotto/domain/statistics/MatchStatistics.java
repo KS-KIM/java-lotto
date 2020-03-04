@@ -1,9 +1,9 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static lotto.domain.LottoGenerative.LOTTO_PRICE;
+import static lotto.domain.lotto.factory.LottoGenerative.LOTTO_PRICE;
 
 import java.util.HashMap;
 import java.util.List;

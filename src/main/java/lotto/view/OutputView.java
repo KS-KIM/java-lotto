@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.MatchStatistics;
 import lotto.domain.PurchaseCount;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.statistics.MatchStatistics;
 import lotto.util.TextUtil;
 
 /**

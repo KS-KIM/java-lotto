@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
@@ -6,6 +6,8 @@ import static java.util.stream.Collectors.toList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import lotto.domain.statistics.MatchResult;
 
 /**
  * 여러 개의 로또를 가지는 클래스

@@ -2,11 +2,11 @@ package lotto.util;
 
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.MatchStatistics;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.statistics.LottoRank;
+import lotto.domain.statistics.MatchStatistics;
 
 /**
  * 출력 문자열을 생성해주는 유틸리티 클래스

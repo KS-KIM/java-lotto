@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto.factory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -10,6 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.domain.PurchaseMoney;
+import lotto.domain.lotto.LottoTicket;
 
 /**
  * 로또 번호 수동 생성 테스트 클래스

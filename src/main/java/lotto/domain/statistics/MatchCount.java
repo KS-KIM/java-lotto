@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
 import java.util.HashMap;
 import java.util.Map;

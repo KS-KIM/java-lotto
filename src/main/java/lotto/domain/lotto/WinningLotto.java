@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.statistics.MatchCount;
+import lotto.domain.statistics.MatchResult;
 
 /**
  * 당첨 번호 클래스

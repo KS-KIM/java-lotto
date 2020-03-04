@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto.factory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.PurchaseMoney;
+import lotto.domain.lotto.LottoTicket;
 
 /**
  * 수동과 자동 로또를 생성하는 클래스

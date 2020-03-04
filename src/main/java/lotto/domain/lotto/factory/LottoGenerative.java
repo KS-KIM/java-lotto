@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto.factory;
+
+import lotto.domain.PurchaseMoney;
+import lotto.domain.lotto.LottoTicket;
 
 /**
  * 로또 수 생성 인터페이스

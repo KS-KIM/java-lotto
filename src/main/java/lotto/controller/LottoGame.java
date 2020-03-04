@@ -11,19 +11,19 @@ import static lotto.view.OutputView.printTotalProfits;
 
 import java.util.List;
 
-import lotto.domain.AutoLottoTicketFactory;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerative;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketFactory;
-import lotto.domain.ManualLottoTicketFactory;
-import lotto.domain.MatchResult;
-import lotto.domain.MatchStatistics;
 import lotto.domain.PurchaseCount;
 import lotto.domain.PurchaseMoney;
-import lotto.domain.WinningLotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lotto.factory.AutoLottoTicketFactory;
+import lotto.domain.lotto.factory.LottoGenerative;
+import lotto.domain.lotto.factory.LottoTicketFactory;
+import lotto.domain.lotto.factory.ManualLottoTicketFactory;
+import lotto.domain.statistics.LottoRank;
+import lotto.domain.statistics.MatchResult;
+import lotto.domain.statistics.MatchStatistics;
 import lotto.view.InputView;
 
 /**

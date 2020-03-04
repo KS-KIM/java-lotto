@@ -1,9 +1,14 @@
-package lotto.domain;
+package lotto.domain.lotto.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+
+import lotto.domain.PurchaseMoney;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 /**
  * 로또 번호 자동 생성 클래스
