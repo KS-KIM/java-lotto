@@ -57,7 +57,7 @@ public class LottoGame {
 
 	private WinningLotto inputWinningLotto() {
 		Lotto lotto = Lotto.ofComma(InputView.inputWinningLotto());
-		LottoNumber bonusNumber = LottoNumber.of(inputBonusBall());
+		LottoNumber bonusNumber = LottoNumber.valueOf(inputBonusBall());
 		return new WinningLotto(lotto, bonusNumber);
 	}
 

@@ -35,15 +35,14 @@ public class Lotto {
 
 	static Lotto of(int... numbers) {
 		return new Lotto(Arrays.stream(numbers)
-				.mapToObj(LottoNumber::of)
+				.mapToObj(LottoNumber::valueOf)
 				.collect(Collectors.toList()));
 	}
 
 	public static Lotto ofComma(String input) {
 		return new Lotto(Stream.of(input.split(NUMBER_DELIMITER))
 				.map(String::trim)
-				.map(Integer::valueOf)
-				.map(LottoNumber::of)
+				.map(LottoNumber::valueOf)
 				.collect(Collectors.toList()));
 	}
 

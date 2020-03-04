@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 로또 수 클래스
@@ -15,6 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_VALUE = 1;
 	public static final int MAX_VALUE = 45;
 	private static final String INVALID_NUMBER_MESSAGE = "생성할 수 없는 수입니다.";
+	private static final String INVALID_LOTTO_NUMBER_STRING = "문자열이 올바르게 주어지지 않았습니다.";
 	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
 	static {
@@ -30,15 +32,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		this.number = number;
 	}
 
-	public static LottoNumber of(int number) {
-		validate(number);
-		return LOTTO_NUMBER_CACHE.get(number);
-	}
-
 	private static void validate(int number) {
 		if (number < MIN_VALUE || number > MAX_VALUE) {
 			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
+	}
+
+	public static LottoNumber valueOf(String number) {
+		try {
+			return valueOf(Integer.parseInt(number));
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_STRING);
+		}
+	}
+
+	public static LottoNumber valueOf(int number) {
+		return Optional.ofNullable(LOTTO_NUMBER_CACHE.get(number))
+				.orElseThrow(() -> new IllegalArgumentException(INVALID_NUMBER_MESSAGE));
 	}
 
 	@Override

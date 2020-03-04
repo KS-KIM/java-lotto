@@ -38,7 +38,7 @@ public class AutoLottoTicketFactory implements LottoGenerative {
 		return random.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
 				.distinct()
 				.limit(Lotto.SIZE)
-				.mapToObj(LottoNumber::of)
+				.mapToObj(LottoNumber::valueOf)
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 	}
 }

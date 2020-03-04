@@ -28,20 +28,20 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("로또 한 장과 보너스 볼을 인자로 받아 인스턴스를 생성한다")
 	void constructor() {
-		assertThat(new WinningLotto(lotto, LottoNumber.of(6))).isInstanceOf(WinningLotto.class);
+		assertThat(new WinningLotto(lotto, LottoNumber.valueOf(6))).isInstanceOf(WinningLotto.class);
 	}
 
 	@Test
 	@DisplayName("로또 한 장과 보너스 번호가 중복되는 경우 예외가 발생한다")
 	void constructor_LottoNumberAndBonusNumberDuplicated() {
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
-				() -> new WinningLotto(lotto, LottoNumber.of(45)));
+				() -> new WinningLotto(lotto, LottoNumber.valueOf(45)));
 	}
 
 	@Test
 	@DisplayName("로또를 한 장 받아 반환한 당첨 순위를 반환한다")
 	void match() {
-		WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(9));
+		WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(9));
 		MatchResult expect = new MatchResult(MatchCount.of(6), false);
 		assertThat(winningLotto.match(Lotto.of(1, 2, 5, 43, 44, 45))).isEqualTo(expect);
 	}

@@ -28,29 +28,29 @@ public class LottoTest {
 		return Stream.of(
 				null,
 				new ArrayList<>(),
-				Arrays.asList(LottoNumber.of(1),
-						LottoNumber.of(2),
-						LottoNumber.of(3),
-						LottoNumber.of(43),
-						LottoNumber.of(44)),
-				Arrays.asList(LottoNumber.of(1),
-						LottoNumber.of(2),
-						LottoNumber.of(3),
-						LottoNumber.of(4),
-						LottoNumber.of(43),
-						LottoNumber.of(44),
-						LottoNumber.of(45)));
+				Arrays.asList(LottoNumber.valueOf(1),
+						LottoNumber.valueOf(2),
+						LottoNumber.valueOf(3),
+						LottoNumber.valueOf(43),
+						LottoNumber.valueOf(44)),
+				Arrays.asList(LottoNumber.valueOf(1),
+						LottoNumber.valueOf(2),
+						LottoNumber.valueOf(3),
+						LottoNumber.valueOf(4),
+						LottoNumber.valueOf(43),
+						LottoNumber.valueOf(44),
+						LottoNumber.valueOf(45)));
 	}
 
 	@Test
 	@DisplayName("로또 번호 여섯 개를 받아서 로또 인스턴스를 생성한다")
 	void constructor() {
-		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(43),
-				LottoNumber.of(44),
-				LottoNumber.of(45));
+		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.valueOf(1),
+				LottoNumber.valueOf(2),
+				LottoNumber.valueOf(3),
+				LottoNumber.valueOf(43),
+				LottoNumber.valueOf(44),
+				LottoNumber.valueOf(45));
 		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
@@ -64,30 +64,30 @@ public class LottoTest {
 	@Test
 	@DisplayName("중복된 수가 있는 경우 예외가 발생한다")
 	void constructor_HasDuplicatedNumber() {
-		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(2),
-				LottoNumber.of(43),
-				LottoNumber.of(44),
-				LottoNumber.of(45));
+		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.valueOf(1),
+				LottoNumber.valueOf(2),
+				LottoNumber.valueOf(2),
+				LottoNumber.valueOf(43),
+				LottoNumber.valueOf(44),
+				LottoNumber.valueOf(45));
 		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(lottoNumbers));
 	}
 
 	@Test
 	@DisplayName("생성자를 통해 만들어진 로또 번호는 정렬되어 있다")
 	void constructor_SortedValues() {
-		Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45),
-				LottoNumber.of(44),
-				LottoNumber.of(43),
-				LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3)));
-		Lotto expected = new Lotto(Arrays.asList(LottoNumber.of(1),
-				LottoNumber.of(2),
-				LottoNumber.of(3),
-				LottoNumber.of(43),
-				LottoNumber.of(44),
-				LottoNumber.of(45)));
+		Lotto lotto = new Lotto(Arrays.asList(LottoNumber.valueOf(45),
+				LottoNumber.valueOf(44),
+				LottoNumber.valueOf(43),
+				LottoNumber.valueOf(1),
+				LottoNumber.valueOf(2),
+				LottoNumber.valueOf(3)));
+		Lotto expected = new Lotto(Arrays.asList(LottoNumber.valueOf(1),
+				LottoNumber.valueOf(2),
+				LottoNumber.valueOf(3),
+				LottoNumber.valueOf(43),
+				LottoNumber.valueOf(44),
+				LottoNumber.valueOf(45)));
 		assertThat(lotto).isEqualTo(expected);
 	}
 

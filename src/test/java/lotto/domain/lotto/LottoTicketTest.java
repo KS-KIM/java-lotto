@@ -35,7 +35,7 @@ public class LottoTicketTest {
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 5, 43, 44, 45),
 				Lotto.of(1, 2, 3, 43, 44, 45)));
-		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.of(7));
+		WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 5, 43, 44, 45), LottoNumber.valueOf(7));
 
 		List<MatchResult> expected = new ArrayList<>();
 		expected.add(new MatchResult(MatchCount.of(6), false));
